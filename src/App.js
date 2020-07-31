@@ -222,11 +222,32 @@ class App extends Component {
           <Divider>WELCOME</Divider>
         </Row>
         <Row>
-          <Col span={12}>
+          <Col span={4}></Col>
+          <Col span={16}>
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                border: "1px solid #ffffff",
+                borderRadius: "10px",
+                padding: "10px",
+              }}
+            >
+              <Calendar
+                dateCellRender={this.dateCellRender}
+                onSelect={this.onSelect}
+                onPanelChange={this.onPanelChange}
+              />
+            </div>
+          </Col>
+          <Col span={4}></Col>
+        </Row>
+        <Row>
+          <Col span={4}></Col>
+          <Col span={16}>
             <List
-              style={{ marginTop: "18%", marginRight: "15%", marginLeft: "8%" }}
+              // style={{ marginTop: "18%", marginRight: "15%", marginLeft: "8%" }}
               header={<div>EVENTS OF THE DAY</div>}
-              size="small"
+              size="large"
               itemLayout="horizontal"
               dataSource={listItems}
               renderItem={(item) => (
@@ -306,22 +327,7 @@ class App extends Component {
               )}
             />
           </Col>
-          <Col span={12}>
-            <div
-              style={{
-                backgroundColor: "#ffffff",
-                border: "1px solid #ffffff",
-                borderRadius: "10px",
-                padding: "10px",
-              }}
-            >
-              <Calendar
-                dateCellRender={this.dateCellRender}
-                onSelect={this.onSelect}
-                onPanelChange={this.onPanelChange}
-              />
-            </div>
-          </Col>
+          <Col span={4}></Col>
         </Row>
         <Footer style={{ textAlign: "center" }}>
           Created by Lovedeep Singh Sidhu
