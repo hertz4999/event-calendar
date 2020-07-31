@@ -197,7 +197,12 @@ class App extends Component {
     var listItems;
     if (index === -1) {
       listItems = [
-        { title: "NO EVENTS AVAILABLE", time: "----", desc: "-----------" },
+        {
+          title: "NO EVENTS AVAILABLE",
+          time: "----",
+          desc: "-----------",
+          price: "----",
+        },
       ];
     } else {
       listItems = this.state.data[index].events;
