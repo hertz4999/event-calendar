@@ -73,41 +73,42 @@ class App extends Component {
   }
   dateCellRender = (value) => {
     var chk = value.toObject();
+    var flag = 0;
     this.state.data.forEach((mon) => {
       if (
-        mon.date.year == chk.year &&
-        mon.date.month == chk.month &&
-        mon.date.day == chk.day
+        mon.date.years === chk.years &&
+        mon.date.months === chk.months &&
+        mon.date.date === chk.date
       ) {
-        return (
-          <ul className="events">
-            <li key="0">EVENTS AVAILABLE</li>
-          </ul>
-        );
+        flag = 1;
       }
     });
+    if (flag == 1) {
+      return (
+        <ul className="events">
+          <li key="0">EVENTS AVAILABLE</li>
+        </ul>
+      );
+    }
   };
   onSelect = (value) => {
-    var nState = { ...this.state };
-    nState.value = value.toObject();
-    nState.selectedValue = value.toObject();
-    this.setState(nState);
-    console.log(value);
+    this.setState({
+      value: value.toObject(),
+      selectedValue: value.toObject(),
+    });
   };
 
   onPanelChange = (value) => {
-    var nState = { ...this.state };
-    nState.value = value.toObject();
-    this.setState(nState);
+    this.setState({ value: value.toObject() });
   };
   render() {
     var { data, selectedValue } = this.state;
     var index = -1;
     data.forEach((val, i) => {
       if (
-        val.date.year == selectedValue.year &&
-        val.date.month == selectedValue.month &&
-        val.date.day == selectedValue.day
+        val.date.years == selectedValue.years &&
+        val.date.months == selectedValue.months &&
+        val.date.date == selectedValue.date
       ) {
         index = i;
       }
@@ -120,7 +121,7 @@ class App extends Component {
     } else {
       listItems = this.state.data[index].events;
     }
-    console.log(this.state);
+
     return (
       <div className="App">
         <Row>
@@ -139,7 +140,7 @@ class App extends Component {
                     <Button
                       style={{ fontSize: 20, paddingBottom: 40 }}
                       size="large"
-                      type="primary"
+                      type={index == -1 ? "" : "primary"}
                       shape="round"
                     >
                       Register
