@@ -4,13 +4,15 @@ import {
   Button,
   Calendar,
   Divider,
+  Input,
   Layout,
+  Modal,
   Row,
   Col,
   List,
   Avatar,
 } from "antd";
-import { CalendarTwoTone } from "@ant-design/icons";
+import { CalendarTwoTone, MailOutlined, UserOutlined } from "@ant-design/icons";
 import moment from "moment";
 
 const { Footer } = Layout;
@@ -22,6 +24,7 @@ class App extends Component {
       data: [],
       value: "",
       selectedValue: "",
+      visible: false,
     };
   }
   componentDidMount() {
@@ -78,7 +81,7 @@ class App extends Component {
         ],
       },
       {
-        date: moment("2020-07-21").toObject(),
+        date: moment("2020-08-21").toObject(),
         events: [
           {
             title: "THURSDAY TURNDOWN WITH COACH MINI",
@@ -135,6 +138,24 @@ class App extends Component {
       selectedValue: moment("2020-07-31").toObject(),
     });
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
   dateCellRender = (value) => {
     var chk = value.toObject();
     var flag = 0;
@@ -147,7 +168,7 @@ class App extends Component {
         flag = 1;
       }
     });
-    if (flag == 1) {
+    if (flag === 1) {
       return <Badge status="success" text="EVENTS AVAILABLE" />;
     }
   };
@@ -166,15 +187,15 @@ class App extends Component {
     var index = -1;
     data.forEach((val, i) => {
       if (
-        val.date.years == selectedValue.years &&
-        val.date.months == selectedValue.months &&
-        val.date.date == selectedValue.date
+        val.date.years === selectedValue.years &&
+        val.date.months === selectedValue.months &&
+        val.date.date === selectedValue.date
       ) {
         index = i;
       }
     });
     var listItems;
-    if (index == -1) {
+    if (index === -1) {
       listItems = [
         { title: "NO EVENTS AVAILABLE", time: "----", desc: "-----------" },
       ];
@@ -206,14 +227,36 @@ class App extends Component {
               renderItem={(item) => (
                 <List.Item
                   actions={[
-                    <Button
-                      style={{ fontSize: 20, paddingBottom: 40 }}
-                      size="large"
-                      type={index == -1 ? "" : "primary"}
-                      shape="round"
-                    >
-                      Register
-                    </Button>,
+                    <div>
+                      <Button
+                        style={{ fontSize: 20, paddingBottom: 40 }}
+                        size="large"
+                        type={index === -1 ? "" : "primary"}
+                        shape="round"
+                        onClick={this.showModal}
+                      >
+                        Register
+                      </Button>{" "}
+                      <Modal
+                        title="Register"
+                        visible={this.state.visible}
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel}
+                      >
+                        <Input
+                          size="large"
+                          placeholder="Name"
+                          prefix={<UserOutlined />}
+                        />
+                        <br />
+                        <br />
+                        <Input
+                          size="large"
+                          placeholder="Email"
+                          prefix={<MailOutlined />}
+                        />
+                      </Modal>
+                    </div>,
                   ]}
                 >
                   <List.Item.Meta
