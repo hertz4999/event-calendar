@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import { Badge, Button, Calendar, Row, Col, List, Avatar } from "antd";
+import {
+  Badge,
+  Button,
+  Calendar,
+  Divider,
+  Layout,
+  Row,
+  Col,
+  List,
+  Avatar,
+} from "antd";
 import { CalendarTwoTone } from "@ant-design/icons";
 import moment from "moment";
+
+const { Footer } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +28,57 @@ class App extends Component {
     var data = [
       {
         date: moment("2020-08-02").toObject(),
+        events: [
+          {
+            title: "THURSDAY TURNDOWN WITH COACH MINI",
+            time: "7 am",
+            desc: "With Mr. abc",
+            price: "Rs 500",
+          },
+          {
+            title: "MORNING FLOW-SUN SALUTE",
+            time: "9 am",
+            desc: "With Mr. xyz",
+            price: "Rs 500",
+          },
+        ],
+      },
+      {
+        date: moment("2020-07-02").toObject(),
+        events: [
+          {
+            title: "THURSDAY TURNDOWN WITH COACH MINI",
+            time: "7 am",
+            desc: "With Mr. abc",
+            price: "Rs 500",
+          },
+          {
+            title: "MORNING FLOW-SUN SALUTE",
+            time: "9 am",
+            desc: "With Mr. xyz",
+            price: "Rs 500",
+          },
+        ],
+      },
+      {
+        date: moment("2020-07-15").toObject(),
+        events: [
+          {
+            title: "THURSDAY TURNDOWN WITH COACH MINI",
+            time: "7 am",
+            desc: "With Mr. abc",
+            price: "Rs 500",
+          },
+          {
+            title: "MORNING FLOW-SUN SALUTE",
+            time: "9 am",
+            desc: "With Mr. xyz",
+            price: "Rs 500",
+          },
+        ],
+      },
+      {
+        date: moment("2020-07-21").toObject(),
         events: [
           {
             title: "THURSDAY TURNDOWN WITH COACH MINI",
@@ -126,15 +189,16 @@ class App extends Component {
       >
         <Row>
           <h1
-            style={{ marginTop: "1%", marginRight: "40%", marginLeft: "43%" }}
+            style={{ marginTop: "1%", marginRight: "40%", marginLeft: "42%" }}
           >
             <CalendarTwoTone /> EVENT CALENDAR
           </h1>
+          <Divider>WELCOME</Divider>
         </Row>
         <Row>
           <Col span={12}>
             <List
-              style={{ marginTop: "12%", marginRight: "15%", marginLeft: "8%" }}
+              style={{ marginTop: "18%", marginRight: "15%", marginLeft: "8%" }}
               header={<div>EVENTS OF THE DAY</div>}
               size="small"
               itemLayout="horizontal"
@@ -181,6 +245,8 @@ class App extends Component {
                             float: "right",
                             backgroundColor: "#f6ffed",
                             border: "2px solid #b7eb8f",
+                            borderRadius: "8px",
+                            padding: "3px",
                           }}
                         >
                           {item.price}
@@ -209,6 +275,9 @@ class App extends Component {
             </div>
           </Col>
         </Row>
+        <Footer style={{ textAlign: "center" }}>
+          Created by Lovedeep Singh Sidhu
+        </Footer>
       </div>
     );
   }
