@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Calendar, Row, Col, List, Avatar } from "antd";
+import { Badge, Button, Calendar, Row, Col, List, Avatar } from "antd";
+import { CalendarTwoTone } from "@ant-design/icons";
 import moment from "moment";
 
 class App extends Component {
@@ -84,11 +85,7 @@ class App extends Component {
       }
     });
     if (flag == 1) {
-      return (
-        <ul className="events">
-          <li key="0">EVENTS AVAILABLE</li>
-        </ul>
-      );
+      return <Badge status="success" text="EVENTS AVAILABLE" />;
     }
   };
   onSelect = (value) => {
@@ -123,15 +120,23 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div
+        className="App"
+        style={{ backgroundColor: "#f0f2f5", height: "100%" }}
+      >
         <Row>
-          <h1>EVENT CALENDAR</h1>
+          <h1
+            style={{ marginTop: "1%", marginRight: "40%", marginLeft: "43%" }}
+          >
+            <CalendarTwoTone /> EVENT CALENDAR
+          </h1>
         </Row>
         <Row>
           <Col span={12}>
             <List
-              style={{ marginTop: 100, marginRight: 10 }}
-              size="large"
+              style={{ marginTop: "12%", marginRight: "15%", marginLeft: "8%" }}
+              header={<div>EVENTS OF THE DAY</div>}
+              size="small"
               itemLayout="horizontal"
               dataSource={listItems}
               renderItem={(item) => (
@@ -155,7 +160,7 @@ class App extends Component {
                           backgroundColor: "#7dc0ff",
                           fontSize: 27,
                         }}
-                        size={100}
+                        size={80}
                       >
                         {" "}
                         {item.time}
@@ -188,11 +193,20 @@ class App extends Component {
             />
           </Col>
           <Col span={12}>
-            <Calendar
-              dateCellRender={this.dateCellRender}
-              onSelect={this.onSelect}
-              onPanelChange={this.onPanelChange}
-            />
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                border: "1px solid #ffffff",
+                borderRadius: "10px",
+                padding: "10px",
+              }}
+            >
+              <Calendar
+                dateCellRender={this.dateCellRender}
+                onSelect={this.onSelect}
+                onPanelChange={this.onPanelChange}
+              />
+            </div>
           </Col>
         </Row>
       </div>
