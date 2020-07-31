@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Calendar, Row, Col, List, Avatar } from "antd";
+import moment from "moment";
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class App extends Component {
   componentDidMount() {
     var data = [
       {
-        date: "2020-08-02",
+        date: moment("2020-08-02").toObject(),
         events: [
           {
             title: "THURSDAY TURNDOWN WITH COACH MINI",
@@ -30,7 +31,7 @@ class App extends Component {
         ],
       },
       {
-        date: "2020-07-31",
+        date: moment("2020-07-31").toObject(),
         events: [
           {
             title: "FRIDAY TURNDOWN WITH COACH",
@@ -47,7 +48,7 @@ class App extends Component {
         ],
       },
       {
-        date: "2020-08-05",
+        date: moment("2020-08-05").toObject(),
         events: [
           {
             title: "WEDNESDAY TURNDOWN WITH COACH",
@@ -66,28 +67,59 @@ class App extends Component {
     ];
     this.setState({
       data: data,
-      value: "2020-07-31",
-      selectedValue: "2020-07-31",
+      value: moment("2020-07-31").toObject(),
+      selectedValue: moment("2020-07-31").toObject(),
     });
   }
-  dataCellRender = (value) => {
-    console.log("dataCellREnder" + value);
+  dateCellRender = (value) => {
+    var chk = value.toObject();
+    this.state.data.forEach((mon) => {
+      if (
+        mon.date.year == chk.year &&
+        mon.date.month == chk.month &&
+        mon.date.day == chk.day
+      ) {
+        return (
+          <ul className="events">
+            <li key="0">EVENTS AVAILABLE</li>
+          </ul>
+        );
+      }
+    });
   };
   onSelect = (value) => {
     var nState = { ...this.state };
-    nState.value = value;
-    nState.selectedValue = value;
+    nState.value = value.toObject();
+    nState.selectedValue = value.toObject();
     this.setState(nState);
     console.log(value);
   };
 
   onPanelChange = (value) => {
     var nState = { ...this.state };
-    nState.value = value;
+    nState.value = value.toObject();
     this.setState(nState);
   };
   render() {
-    var { data, value } = this.state;
+    var { data, selectedValue } = this.state;
+    var index = -1;
+    data.forEach((val, i) => {
+      if (
+        val.date.year == selectedValue.year &&
+        val.date.month == selectedValue.month &&
+        val.date.day == selectedValue.day
+      ) {
+        index = i;
+      }
+    });
+    var listItems;
+    if (index == -1) {
+      listItems = [
+        { title: "NO EVENTS AVAILABLE", time: "----", desc: "-----------" },
+      ];
+    } else {
+      listItems = this.state.data[index].events;
+    }
     console.log(this.state);
     return (
       <div className="App">
@@ -96,11 +128,11 @@ class App extends Component {
         </Row>
         <Row>
           <Col span={12}>
-            {/* <List
+            <List
               style={{ marginTop: 100, marginRight: 10 }}
               size="large"
               itemLayout="horizontal"
-              dataSource={data[0].events}
+              dataSource={listItems}
               renderItem={(item) => (
                 <List.Item
                   actions={[
@@ -152,11 +184,11 @@ class App extends Component {
                   />
                 </List.Item>
               )}
-            /> */}
+            />
           </Col>
           <Col span={12}>
             <Calendar
-              dataCellRender={this.dataCellRender}
+              dateCellRender={this.dateCellRender}
               onSelect={this.onSelect}
               onPanelChange={this.onPanelChange}
             />
