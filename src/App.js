@@ -221,7 +221,7 @@ class App extends Component {
                 fontSize: "3vh",
                 marginTop: "1%",
                 marginRight: "20%",
-                marginLeft: "24%",
+                marginLeft: "34%",
               }}
             >
               <CalendarTwoTone /> EVENT CALENDAR
