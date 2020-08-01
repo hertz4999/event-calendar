@@ -214,11 +214,20 @@ class App extends Component {
         style={{ backgroundColor: "#f0f2f5", height: "100%" }}
       >
         <Row>
-          <h1
-            style={{ marginTop: "1%", marginRight: "40%", marginLeft: "42%" }}
-          >
-            <CalendarTwoTone /> EVENT CALENDAR
-          </h1>
+          <Col span={8}></Col>
+          <Col span={8}>
+            <h1
+              style={{
+                fontSize: "3vh",
+                marginTop: "1%",
+                marginRight: "20%",
+                marginLeft: "24%",
+              }}
+            >
+              <CalendarTwoTone /> EVENT CALENDAR
+            </h1>
+          </Col>
+          <Col span={8}></Col>
           <Divider>WELCOME</Divider>
         </Row>
         <Row>
@@ -255,7 +264,7 @@ class App extends Component {
                   actions={[
                     <div>
                       <Button
-                        style={{ fontSize: 20, paddingBottom: 40 }}
+                        style={{ fontSize: "2.5vh", paddingBottom: "32%" }}
                         size="large"
                         type={index === -1 ? "" : "primary"}
                         shape="round"
@@ -291,7 +300,7 @@ class App extends Component {
                         style={{
                           color: "#ffffff",
                           backgroundColor: "#7dc0ff",
-                          fontSize: 27,
+                          fontSize: "3vh",
                         }}
                         size={80}
                       >
@@ -300,16 +309,14 @@ class App extends Component {
                       </Avatar>
                     }
                     title={
-                      <a style={{ fontSize: 28 }} href="https://ant.design">
-                        {item.title}
-                      </a>
+                      <span style={{ fontSize: "3vh" }}>{item.title}</span>
                     }
                     description={
-                      <span>
-                        <span style={{ fontSize: 20 }}>{item.desc}</span>
+                      <span style={{ fontSize: "2vh" }}>
+                        <span style={{ fontSize: "100%" }}>{item.desc}</span>
                         <span
                           style={{
-                            fontSize: 20,
+                            fontSize: "100%",
                             color: "#89da75",
                             float: "right",
                             backgroundColor: "#f6ffed",
